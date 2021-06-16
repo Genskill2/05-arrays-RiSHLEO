@@ -1,107 +1,76 @@
 /* Enter your solutions in this file */
-#include <stdio.h>
-/max function/
-int max(int a[],int n)
+#include<stdio.h>
+
+int max(int arr[], int len)
 {
-	int max=0;
-	for (int i=0;i<n;i++)
-	{
-		if (a[i]>max)
-			max=a[i];
-		else
-			continue;
-	}
-	return max;
-}
-/min function/
-int min(int a[],int n)
-{
-	int min=a[0];
-	for(int i=0;i<n;i++)
-	{
-		if(a[i]<min)
-			min=a[i];
-		else
-			continue;
-	}
-	return min;
-}
-float average(int a[],int n)
-{
-	int sum=0;
-	float avg=0;
-	for(int i=0;i<n;i++)
-	{
-		sum+=a[i];
-	}
-	avg=sum/n;
-	return avg;
-}
-/mode function/
-int mode(int a[],int n)
-{
-	int lmax=max(a,n);
-	int lmin=min(a,n);
-	int counts[100],b=-1;
-	for(int i =lmin;i<=lmax;i++)
-		{
-		int cnt=0;
-		for(int j=0;j<n;j++)
-		{
-			if(a[j]==i)
-				cnt++;
-		}
-		counts[++b]=cnt;
-		}
-	int cmax=0,flag=0;
-	for (int i=0;i<=b;i++)
-	{
-		if (counts[i]>cmax)
-		{	cmax=counts[i];
-			flag=i-(0-lmin);
-		}
-		else
-			continue;
-	}
-	return flag;
-}
-    int isprime(int i)
-    {
-	int flag=0;
-			for(int j=2;j<i;j++)
-			{
-				if(i%j==0)
-				{
-					flag=1;
-					break;
-				}
-			}
-			if(flag==0)
-			    return 1;
-			else
-			    return 0;
+      int max=arr[0];
+    for(int i=0; i<len; i++)
+    { if (arr[i]>max)
+       max=arr[i];
     }
-int factors(int n,int a[])
+    return max;
+}
+int min(int arr[], int len)
 {
-	int count=0;
-    	int i=2;
-    	while(i<n)
-    	{
-        	if(n%i==0)
-			if(isprime(i)==1)
-			{	a[count]=i;
-				count++;
-                		n=n/i;
-                		if(isprime(n)==1)
-                		{
-                			a[count++]=n;
-                			break;
-                		}
-                		i=2;
-			}
-		else continue;
-		else
-		i++;
-	}
-	return count;
+    int min= arr[0];
+    for(int i=0; i<len; i++)
+    { if (arr[i]<min)
+       min = arr[i];
+    }
+    return min;
+}
+float average(int arr[], int len)
+{
+    float average, sum=0;
+    for( int i=0; i<len; i++)
+    sum+=arr[i];
+    average=sum/len;
+    return average;
+}
+int mode(int arr[], int len)
+{
+    int arrno[len];
+    int n,count=0,a;
+    for( int i=0; i<len; i++){
+    n= arr[i];
+    for(int j=0; j<len; j++)
+    {    if( arr[i]==arr[j])
+        count++;
+    }
+    arrno[i]=count;
+    count =0;
+    }
+    int max=arrno[0];
+    for( int k=0;k<len;k++)
+      { if(arrno[k]>max)
+          max=arrno[k];}
+    for(a=0;a<len; a++)
+    { if(max==arrno[a])
+         break;
+     }
+     return arr[a];
+}
+int factors(int num, int arr[])
+{
+    int cpy=num;
+    int cnt=0;
+    int cnt1=0;
+    for (int i=2; i<num/2;i++)
+    { if(num%i==0){
+    for(int j=2; j<=i;j++)
+    {if(i%j==0)
+    cnt+=1;
+    }
+    if(cnt==1){
+    while(cpy%i==0){
+    arr[cnt1]=i;
+    cpy/=i;
+    cnt1+=1;
+    }
+    cpy=num;}
+    cnt=0;
+    }
+    else
+    continue;}
+    return cnt1;
 }
